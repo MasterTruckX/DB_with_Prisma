@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,73 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model equipmentCategories {
+  id                   Int                    @id @default(autoincrement())
+  name                 String
+  equipmentSubcategory equipmentSubcategory[]
+}
+
+model equipmentSubcategory {
+  id                     Int                 @id @default(autoincrement())
+  name                   String
+  id_equipmentCategories Int
+  equipmentCategories    equipmentCategories @relation(fields: [id_equipmentCategories], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  weapon_arsenal         weapon_arsenal[]
+}
+
+model weapon_arsenal {
+  damagetype              String
+  id                      Int                  @id @default(autoincrement())
+  name                    String
+  description             String
+  id_equipmentsubcategory Int
+  equipmentSubcategory    equipmentSubcategory @relation(fields: [id_equipmentsubcategory], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  weapons                 weapons[]
+}
+
+model weapon_stats {
+  id                 Int             @id @default(autoincrement())
+  physical_attack    Int
+  magic_attack       Int
+  fire_attack        Int
+  light_attack       Int
+  holy_attack        Int
+  critical_attack    Int
+  physical_guard     Int
+  magic_guard        Int
+  fire_guard         Int
+  ligth_guard        Int
+  holy_guard         Int
+  boost_guard        Int
+  str_scaling        Int
+  int_scaling        Int
+  dex_scaling        Int
+  fai_scaling        Int
+  arc_scaling        Int
+  str_required       Int
+  int_required       Int
+  dex_required       Int
+  fai_required       Int
+  arc_required       Int
+  id_weapon_upgrades Int
+  weapon_upgrades    weapon_upgrades @relation(fields: [id_weapon_upgrades], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model weapon_upgrades {
+  id           Int            @id @default(autoincrement())
+  name         String
+  id_weapons   Int
+  weapon_stats weapon_stats[]
+  weapons      weapons        @relation(fields: [id_weapons], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model weapons {
+  id                Int               @id @default(autoincrement())
+  name              String
+  description       String
+  id_weapon_arsenal Int
+  weapon_upgrades   weapon_upgrades[]
+  weapon_arsenal    weapon_arsenal    @relation(fields: [id_weapon_arsenal], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
