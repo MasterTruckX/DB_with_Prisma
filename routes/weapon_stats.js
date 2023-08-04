@@ -4,70 +4,70 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-// getAll Category
+// getAll stats
 router.get('/', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.findMany();
-    res.status(200).json(category);
+    const stats = await prisma.weapon_stats.findMany();
+    res.status(200).json(stats);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// getById Category
+// getById stats
 router.get('/:id', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.findUnique({
+    const stats = await prisma.weapon_stats.findUnique({
       where: {
         id: +req.params.id
       }
     });
-    res.status(200).json(category);
+    res.status(200).json(stats);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// update Category
+// update stats
 router.patch('/:id', async function(req, res, next) {
   try {
-    const categories = await prisma.equipmentCategories.updateMany({
+    const stats = await prisma.weapon_stats.updateMany({
       data: req.body,
       where: {
         id: parseInt(req.params.id)
       }
     });
-    res.status(200).json(categories);
+    res.status(200).json(stats);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// delete Category
+// delete stats
 router.delete('/:id', async function(req, res, next) {
   try {
-    const categories = await prisma.equipmentCategories.delete({
+    const stats = await prisma.weapon_stats.delete({
       where: {
         id: parseInt(req.params.id)
       }
     });
-    res.status(200).json(categories);
+    res.status(200).json(stats);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// create Category
+// create stats
 router.post('/', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.create({
+    const stats = await prisma.weapon_stats.create({
       data: req.body,
     });
-    res.status(201).json(category);
+    res.status(201).json(stats);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);

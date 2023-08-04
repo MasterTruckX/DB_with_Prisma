@@ -4,70 +4,70 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-// getAll Category
+// getAll upgrades
 router.get('/', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.findMany();
-    res.status(200).json(category);
+    const upgrades = await prisma.weapon_upgrades.findMany();
+    res.status(200).json(upgrades);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// getById Category
+// getById upgrades
 router.get('/:id', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.findUnique({
+    const upgrades = await prisma.weapon_upgrades.findUnique({
       where: {
         id: +req.params.id
       }
     });
-    res.status(200).json(category);
+    res.status(200).json(upgrades);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// update Category
+// update upgrades
 router.patch('/:id', async function(req, res, next) {
   try {
-    const categories = await prisma.equipmentCategories.updateMany({
+    const upgrades = await prisma.weapon_upgrades.updateMany({
       data: req.body,
       where: {
         id: parseInt(req.params.id)
       }
     });
-    res.status(200).json(categories);
+    res.status(200).json(upgrades);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// delete Category
+// delete upgrades
 router.delete('/:id', async function(req, res, next) {
   try {
-    const categories = await prisma.equipmentCategories.delete({
+    const upgrades = await prisma.weapon_upgrades.delete({
       where: {
         id: parseInt(req.params.id)
       }
     });
-    res.status(200).json(categories);
+    res.status(200).json(upgrades);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// create Category
+// create upgrades
 router.post('/', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.create({
+    const upgrades = await prisma.weapon_upgrades.create({
       data: req.body,
     });
-    res.status(201).json(category);
+    res.status(201).json(upgrades);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);

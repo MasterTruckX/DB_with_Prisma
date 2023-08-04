@@ -4,70 +4,70 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-// getAll Category
+// getAll Subcategory
 router.get('/', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.findMany();
-    res.status(200).json(category);
+    const subcategory = await prisma.equipmentSubcategory.findMany();
+    res.status(200).json(subcategory);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// getById Category
+// getById Subcategory
 router.get('/:id', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.findUnique({
+    const subcategory = await prisma.equipmentSubcategory.findUnique({
       where: {
         id: +req.params.id
       }
     });
-    res.status(200).json(category);
+    res.status(200).json(subcategory);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// update Category
+// update Subcategory
 router.patch('/:id', async function(req, res, next) {
   try {
-    const categories = await prisma.equipmentCategories.updateMany({
+    const equipmentSubcategory = await prisma.equipmentSubcategory.updateMany({
       data: req.body,
       where: {
         id: parseInt(req.params.id)
       }
     });
-    res.status(200).json(categories);
+    res.status(200).json(equipmentSubcategory);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// delete Category
+// delete Subcategory
 router.delete('/:id', async function(req, res, next) {
   try {
-    const categories = await prisma.equipmentCategories.delete({
+    const subcategory = await prisma.equipmentSubcategory.delete({
       where: {
         id: parseInt(req.params.id)
       }
     });
-    res.status(200).json(categories);
+    res.status(200).json(subcategory);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
   }
 });
 
-// create Category
+// create Subcategory
 router.post('/', async function(req, res, next) {
   try {
-    const category = await prisma.equipmentCategories.create({
+    const subcategory = await prisma.equipmentSubcategory.create({
       data: req.body,
     });
-    res.status(201).json(category);
+    res.status(201).json(subcategory);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);

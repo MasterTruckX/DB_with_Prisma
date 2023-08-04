@@ -6,7 +6,12 @@ const logger = require('morgan');
 require('dotenv').config()
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/equipmentCategories');
+const categoriesRouter = require('./routes/equipmentCategories');
+const subCategoriesRouter = require('./routes/equipmentSubcategory');
+const arsenalRouter = require('./routes/weapon_arsenal');
+const weaponsRouter = require('./routes/weapons');
+const upgradesRouter = require('./routes/weapon_upgrades');
+const statsRouter = require('./routes/weapon_stats');
 
 const app = express();
 
@@ -17,7 +22,12 @@ app.use(cookieParser());
 
 
 app.use('/', indexRouter);
-app.use('/equipmentCategories', usersRouter);
+app.use('/equipmentCategories', categoriesRouter);
+app.use('/equipmentSubcategory', subCategoriesRouter);
+app.use('/weapon_arsenal', arsenalRouter);
+app.use('/weapons', weaponsRouter);
+app.use('/weapon_upgrades', upgradesRouter);
+app.use('/weapon_stats', statsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
